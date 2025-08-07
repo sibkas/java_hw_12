@@ -1,3 +1,6 @@
+import lombok.Getter;
+
+@Getter
 public class SimpleTask extends Task {
     protected String title;
 
@@ -11,7 +14,4 @@ public class SimpleTask extends Task {
         return title.contains(query);
     }
 
-    public String getTitle() {
-        return title;
-    }
 }

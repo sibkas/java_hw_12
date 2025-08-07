@@ -1,3 +1,6 @@
+import lombok.Getter;
+
+@Getter
 public class Epic extends Task {
     protected String[] subtasks;
 
@@ -16,7 +19,4 @@ public class Epic extends Task {
         return false;
     }
 
-    public String[] getSubtasks() {
-        return subtasks;
-    }
 }

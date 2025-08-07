@@ -1,3 +1,6 @@
+import lombok.Getter;
+
+@Getter
 public class Meeting extends Task {
     protected String topic;
     protected String project;
@@ -16,18 +19,6 @@ public class Meeting extends Task {
             return true;
         }
         return project.contains(query);
-    }
-
-    public String getTopic() {
-        return topic;
-    }
-
-    public String getProject() {
-        return project;
-    }
-
-    public String getStart() {
-        return start;
     }
 
 }

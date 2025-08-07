@@ -1,6 +1,6 @@
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.assertArrayEquals;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 
 public class TodosTest {
@@ -36,7 +36,7 @@ public class TodosTest {
         Todos todos = new Todos();
 
         Task[] actualEmpty = todos.search("Несуществующий запрос");
-        Assertions.assertEquals(0, actualEmpty.length);
+        assertEquals(0, actualEmpty.length);
     }
 
 
@@ -49,13 +49,14 @@ public class TodosTest {
         Task[] actual = todos.findAll();
         assertArrayEquals(expected, actual);
     }
+
     @Test
     public void findAllReturnsAllAddedSimpleTasks() {
         SimpleTask simpleTask = new SimpleTask(1, "Позвонить родителям");
         Todos todos = new Todos();
         todos.add(simpleTask);
-        Task[] actual  = todos.search("друзьям");
-        Assertions.assertEquals(0, actual.length);
+        Task[] actual = todos.search("друзьям");
+        assertEquals(0, actual.length);
     }
 
     @Test
@@ -79,7 +80,7 @@ public class TodosTest {
         todos.add(epic);
 
         Task[] actual = todos.search("соль");
-        Assertions.assertEquals(0, actual.length);
+        assertEquals(0, actual.length);
 
     }
 
@@ -159,8 +160,71 @@ public class TodosTest {
         todos.add(meeting);
 
         Task[] actual = todos.search("вечер");
-        Assertions.assertEquals(0, actual.length);
+        assertEquals(0, actual.length);
     }
+
+    @Test
+    public void shouldReturnSubtasksArray() {
+        String[] subtasks = {"Молоко", "Яйца", "Хлеб"};
+        Epic epic = new Epic(1, subtasks);
+
+        String[] actualSubtasks = epic.getSubtasks();
+
+        assertArrayEquals(subtasks, actualSubtasks);
+    }
+
+    @Test
+    public void simpleTaskGetTitleReturnsCorrectTitle() {
+        String expectedTitle = "Позвонить родителям";
+        SimpleTask simpleTask = new SimpleTask(1, expectedTitle);
+
+        String actualTitle = simpleTask.getTitle();
+
+        assertEquals(expectedTitle, actualTitle);
+    }
+
+    @Test
+    public void meetingGetTopicReturnsCorrectTopic() {
+        String expectedTopic = "Встреча по проекту";
+        Meeting meeting = new Meeting(2, expectedTopic, "НетоБанк", "утром");
+
+        String actualTopic = meeting.getTopic();
+
+        assertEquals(expectedTopic, actualTopic);
+    }
+
+    @Test
+    public void meetingGetProjectReturnsCorrectProject() {
+        String expectedProject = "НетоБанк";
+        Meeting meeting = new Meeting(2, "Встреча по проекту", expectedProject, "утром");
+
+        String actualProject = meeting.getProject();
+
+        assertEquals(expectedProject, actualProject);
+    }
+
+
+    @Test
+    public void meetingGetStartReturnsCorrectStart() {
+        String expectedStart = "утром";
+        Meeting meeting = new Meeting(2, "Встреча по проекту", "НетоБанк", expectedStart);
+
+        String actualStart = meeting.getStart();
+
+        assertEquals(expectedStart, actualStart);
+    }
+
+    @Test
+    public void getIdReturnsCorrectId() {
+        int expectedId = 42;
+        Task task = new Task(expectedId);
+
+        int actualId = task.getId();
+
+        assertEquals(expectedId, actualId);
+    }
+
+
 
 
 }
